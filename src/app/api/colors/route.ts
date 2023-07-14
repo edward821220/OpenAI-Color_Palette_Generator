@@ -15,16 +15,17 @@ export async function POST(request: Request) {
     messages: [
       {
         role: "system",
-        content: "",
+        content:
+          "你是一個色彩產生器，會根據 Prompt 的描述來產生 5 個可以放進 CSS background-color 的色碼，格式必須是 Array，並且直接產生 Array 就好，不需要其他多餘的字",
       },
       {
         role: "user",
-        content: `${req.message}`,
+        content: `根據我的描述產生和描述有關的顏色色碼：${req.message}`,
       },
     ],
   });
   const data = chatCompletion.data.choices[0].message;
-  console.log(data);
+  console.log(chatCompletion.data);
 
   return NextResponse.json({ data });
 }
